@@ -1,0 +1,1154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BDRebajasCampoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="IdAdmin" />
+          </Key>
+          <Property Name="IdAdmin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Pass" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompraProductos">
+          <Key>
+            <PropertyRef Name="CompraId" />
+          </Key>
+          <Property Name="CompraId" Type="int" Nullable="false" />
+          <Property Name="Proveedor" Type="int" Nullable="false" />
+          <Property Name="FechaCompra" Type="date" Nullable="false" />
+          <Property Name="Producto" Type="int" Nullable="false" />
+          <Property Name="CantidadProductoComprado" Type="int" Nullable="false" />
+          <Property Name="PrecioProductoComprado" Type="money" Nullable="false" />
+          <Property Name="Admin" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetalleFactura">
+          <Key>
+            <PropertyRef Name="DetalleFacturaId" />
+          </Key>
+          <Property Name="DetalleFacturaId" Type="int" Nullable="false" />
+          <Property Name="Venta" Type="int" Nullable="false" />
+          <Property Name="ProductoVendido" Type="int" Nullable="false" />
+          <Property Name="CantidadVendido" Type="int" Nullable="false" />
+          <Property Name="ValorProductoVendido" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Devolucion">
+          <Key>
+            <PropertyRef Name="DevolucionId" />
+          </Key>
+          <Property Name="DevolucionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VentaAsociada" Type="int" Nullable="false" />
+          <Property Name="ProductoDevuelto" Type="int" Nullable="false" />
+          <Property Name="CantidadprodDevuelto" Type="int" Nullable="false" />
+          <Property Name="MotivoDevolucion" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="FechaDevolucion" Type="date" Nullable="false" />
+          <Property Name="VendedorAtendio" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HistoriaClinica">
+          <Key>
+            <PropertyRef Name="HistoriaClinicaId" />
+          </Key>
+          <Property Name="HistoriaClinicaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaHistoria" Type="date" Nullable="false" />
+          <Property Name="MotivoHistoria" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ObservacionHistoria" Type="text" />
+          <Property Name="MedicamentoHistoria" Type="text" />
+          <Property Name="Mascota" Type="int" Nullable="false" />
+          <Property Name="Veterinario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Mascota">
+          <Key>
+            <PropertyRef Name="MascotaId" />
+          </Key>
+          <Property Name="MascotaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreMascota" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="EspecieMascota" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RazaMascota" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="SexoMascota" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Cliente" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="ProductoId" />
+          </Key>
+          <Property Name="ProductoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoProducto" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NombreProducto" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="CantidadProducto" Type="int" Nullable="false" />
+          <Property Name="precioProducto" Type="money" Nullable="false" />
+          <Property Name="SedePertenece" Type="int" Nullable="false" />
+          <Property Name="ProveedorSurte" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BDRebajasCampo.dbo.Receta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Receta">
+          <Key>
+            <PropertyRef Name="HistoriaClinicaId" />
+            <PropertyRef Name="DescripcionReceta" />
+          </Key>
+          <Property Name="HistoriaClinicaId" Type="int" Nullable="false" />
+          <Property Name="DescripcionReceta" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sede">
+          <Key>
+            <PropertyRef Name="SedeId" />
+          </Key>
+          <Property Name="SedeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreSede" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DireccionSede" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TipoUsuario">
+          <Key>
+            <PropertyRef Name="TipoClienteId" />
+          </Key>
+          <Property Name="TipoClienteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreTipoUsuario" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="UsuarioId" />
+          </Key>
+          <Property Name="UsuarioId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CedulaUser" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="NombresUser" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="ApellidosUser" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="TelefonoUser" Type="varchar" MaxLength="10" />
+          <Property Name="DireccionUser" Type="varchar" MaxLength="40" />
+          <Property Name="TipoUser" Type="int" Nullable="false" />
+          <Property Name="Sexouser" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CorreoUser" Type="varchar" MaxLength="40" />
+          <Property Name="EstadoUser" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="User" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Pass" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Sede" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Venta">
+          <Key>
+            <PropertyRef Name="VentaId" />
+          </Key>
+          <Property Name="VentaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaVenta" Type="date" Nullable="false" />
+          <Property Name="CantidadVenta" Type="int" Nullable="false" />
+          <Property Name="ClienteCompra" Type="int" Nullable="false" />
+          <Property Name="VendedorVende" Type="int" Nullable="false" />
+          <Property Name="ValorTotalVenta" Type="money" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Cliente_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Venta">
+              <PropertyRef Name="ClienteCompra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompraProductos_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="1" />
+          <End Role="CompraProductos" Type="Self.CompraProductos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="IdAdmin" />
+            </Principal>
+            <Dependent Role="CompraProductos">
+              <PropertyRef Name="Admin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompraProductos_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="CompraProductos" Type="Self.CompraProductos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="ProductoId" />
+            </Principal>
+            <Dependent Role="CompraProductos">
+              <PropertyRef Name="Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompraProductos_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="CompraProductos" Type="Self.CompraProductos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="CompraProductos">
+              <PropertyRef Name="Proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompraProductos_Usuario1">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="CompraProductos" Type="Self.CompraProductos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="CompraProductos">
+              <PropertyRef Name="Admin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleFactura_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="DetalleFactura" Type="Self.DetalleFactura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="ProductoId" />
+            </Principal>
+            <Dependent Role="DetalleFactura">
+              <PropertyRef Name="ProductoVendido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleFactura_Venta">
+          <End Role="Venta" Type="Self.Venta" Multiplicity="1" />
+          <End Role="DetalleFactura" Type="Self.DetalleFactura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="VentaId" />
+            </Principal>
+            <Dependent Role="DetalleFactura">
+              <PropertyRef Name="Venta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Devolucion_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="Devolucion" Type="Self.Devolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="ProductoId" />
+            </Principal>
+            <Dependent Role="Devolucion">
+              <PropertyRef Name="ProductoDevuelto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Devolucion_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Devolucion" Type="Self.Devolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Devolucion">
+              <PropertyRef Name="VendedorAtendio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Devolucion_Venta">
+          <End Role="Venta" Type="Self.Venta" Multiplicity="1" />
+          <End Role="Devolucion" Type="Self.Devolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="VentaId" />
+            </Principal>
+            <Dependent Role="Devolucion">
+              <PropertyRef Name="VentaAsociada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoriaClinica_Mascota">
+          <End Role="Mascota" Type="Self.Mascota" Multiplicity="1" />
+          <End Role="HistoriaClinica" Type="Self.HistoriaClinica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mascota">
+              <PropertyRef Name="MascotaId" />
+            </Principal>
+            <Dependent Role="HistoriaClinica">
+              <PropertyRef Name="Mascota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoriaClinica_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="HistoriaClinica" Type="Self.HistoriaClinica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="HistoriaClinica">
+              <PropertyRef Name="Veterinario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mascota_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Mascota" Type="Self.Mascota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Mascota">
+              <PropertyRef Name="Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Sede">
+          <End Role="Sede" Type="Self.Sede" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sede">
+              <PropertyRef Name="SedeId" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="SedePertenece" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="ProveedorSurte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receta_HistoriaClinica">
+          <End Role="HistoriaClinica" Type="Self.HistoriaClinica" Multiplicity="1" />
+          <End Role="Receta" Type="Self.Receta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HistoriaClinica">
+              <PropertyRef Name="HistoriaClinicaId" />
+            </Principal>
+            <Dependent Role="Receta">
+              <PropertyRef Name="HistoriaClinicaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Sede">
+          <End Role="Sede" Type="Self.Sede" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sede">
+              <PropertyRef Name="SedeId" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_TipoUsuario">
+          <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuario">
+              <PropertyRef Name="TipoClienteId" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="TipoUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vendedor_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Venta">
+              <PropertyRef Name="VendedorVende" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDRebajasCampoModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompraProductos" EntityType="Self.CompraProductos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalleFactura" EntityType="Self.DetalleFactura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Devolucion" EntityType="Self.Devolucion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HistoriaClinica" EntityType="Self.HistoriaClinica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mascota" EntityType="Self.Mascota" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sede" EntityType="Self.Sede" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Receta" EntityType="Self.Receta" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Receta].[HistoriaClinicaId] AS [HistoriaClinicaId], 
+[Receta].[DescripcionReceta] AS [DescripcionReceta]
+FROM [dbo].[Receta] AS [Receta]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Cliente_Usuario" Association="Self.FK_Cliente_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Venta" EntitySet="Venta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompraProductos_Admin" Association="Self.FK_CompraProductos_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="CompraProductos" EntitySet="CompraProductos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompraProductos_Producto" Association="Self.FK_CompraProductos_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="CompraProductos" EntitySet="CompraProductos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompraProductos_Usuario" Association="Self.FK_CompraProductos_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="CompraProductos" EntitySet="CompraProductos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompraProductos_Usuario1" Association="Self.FK_CompraProductos_Usuario1">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="CompraProductos" EntitySet="CompraProductos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleFactura_Producto" Association="Self.FK_DetalleFactura_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="DetalleFactura" EntitySet="DetalleFactura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleFactura_Venta" Association="Self.FK_DetalleFactura_Venta">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="DetalleFactura" EntitySet="DetalleFactura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Devolucion_Producto" Association="Self.FK_Devolucion_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Devolucion" EntitySet="Devolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Devolucion_Usuario" Association="Self.FK_Devolucion_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Devolucion" EntitySet="Devolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Devolucion_Venta" Association="Self.FK_Devolucion_Venta">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="Devolucion" EntitySet="Devolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoriaClinica_Mascota" Association="Self.FK_HistoriaClinica_Mascota">
+            <End Role="Mascota" EntitySet="Mascota" />
+            <End Role="HistoriaClinica" EntitySet="HistoriaClinica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoriaClinica_Usuario" Association="Self.FK_HistoriaClinica_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="HistoriaClinica" EntitySet="HistoriaClinica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mascota_Usuario" Association="Self.FK_Mascota_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Mascota" EntitySet="Mascota" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Sede" Association="Self.FK_Producto_Sede">
+            <End Role="Sede" EntitySet="Sede" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Usuario" Association="Self.FK_Producto_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receta_HistoriaClinica" Association="Self.FK_Receta_HistoriaClinica">
+            <End Role="HistoriaClinica" EntitySet="HistoriaClinica" />
+            <End Role="Receta" EntitySet="Receta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Sede" Association="Self.FK_Usuario_Sede">
+            <End Role="Sede" EntitySet="Sede" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_TipoUsuario" Association="Self.FK_Usuario_TipoUsuario">
+            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vendedor_Usuario" Association="Self.FK_Vendedor_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Venta" EntitySet="Venta" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BDRebajasCampoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="IdAdmin" />
+          </Key>
+          <Property Name="IdAdmin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pass" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="CompraProductos" Relationship="Self.FK_CompraProductos_Admin" FromRole="Admin" ToRole="CompraProductos" />
+        </EntityType>
+        <EntityType Name="CompraProductos">
+          <Key>
+            <PropertyRef Name="CompraId" />
+          </Key>
+          <Property Name="CompraId" Type="Int32" Nullable="false" />
+          <Property Name="Proveedor" Type="Int32" Nullable="false" />
+          <Property Name="FechaCompra" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Producto" Type="Int32" Nullable="false" />
+          <Property Name="CantidadProductoComprado" Type="Int32" Nullable="false" />
+          <Property Name="PrecioProductoComprado" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Admin" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Admin1" Relationship="Self.FK_CompraProductos_Admin" FromRole="CompraProductos" ToRole="Admin" />
+          <NavigationProperty Name="Producto1" Relationship="Self.FK_CompraProductos_Producto" FromRole="CompraProductos" ToRole="Producto" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_CompraProductos_Usuario" FromRole="CompraProductos" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FK_CompraProductos_Usuario1" FromRole="CompraProductos" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="DetalleFactura">
+          <Key>
+            <PropertyRef Name="DetalleFacturaId" />
+          </Key>
+          <Property Name="DetalleFacturaId" Type="Int32" Nullable="false" />
+          <Property Name="Venta" Type="Int32" Nullable="false" />
+          <Property Name="ProductoVendido" Type="Int32" Nullable="false" />
+          <Property Name="CantidadVendido" Type="Int32" Nullable="false" />
+          <Property Name="ValorProductoVendido" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_DetalleFactura_Producto" FromRole="DetalleFactura" ToRole="Producto" />
+          <NavigationProperty Name="Venta1" Relationship="Self.FK_DetalleFactura_Venta" FromRole="DetalleFactura" ToRole="Venta" />
+        </EntityType>
+        <EntityType Name="Devolucion">
+          <Key>
+            <PropertyRef Name="DevolucionId" />
+          </Key>
+          <Property Name="DevolucionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VentaAsociada" Type="Int32" Nullable="false" />
+          <Property Name="ProductoDevuelto" Type="Int32" Nullable="false" />
+          <Property Name="CantidadprodDevuelto" Type="Int32" Nullable="false" />
+          <Property Name="MotivoDevolucion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaDevolucion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="VendedorAtendio" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_Devolucion_Producto" FromRole="Devolucion" ToRole="Producto" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Devolucion_Usuario" FromRole="Devolucion" ToRole="Usuario" />
+          <NavigationProperty Name="Venta" Relationship="Self.FK_Devolucion_Venta" FromRole="Devolucion" ToRole="Venta" />
+        </EntityType>
+        <EntityType Name="HistoriaClinica">
+          <Key>
+            <PropertyRef Name="HistoriaClinicaId" />
+          </Key>
+          <Property Name="HistoriaClinicaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaHistoria" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="MotivoHistoria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ObservacionHistoria" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MedicamentoHistoria" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Mascota" Type="Int32" Nullable="false" />
+          <Property Name="Veterinario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Mascota1" Relationship="Self.FK_HistoriaClinica_Mascota" FromRole="HistoriaClinica" ToRole="Mascota" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_HistoriaClinica_Usuario" FromRole="HistoriaClinica" ToRole="Usuario" />
+          <NavigationProperty Name="Receta" Relationship="Self.FK_Receta_HistoriaClinica" FromRole="HistoriaClinica" ToRole="Receta" />
+        </EntityType>
+        <EntityType Name="Mascota">
+          <Key>
+            <PropertyRef Name="MascotaId" />
+          </Key>
+          <Property Name="MascotaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreMascota" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EspecieMascota" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RazaMascota" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SexoMascota" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Cliente" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="HistoriaClinica" Relationship="Self.FK_HistoriaClinica_Mascota" FromRole="Mascota" ToRole="HistoriaClinica" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Mascota_Usuario" FromRole="Mascota" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="ProductoId" />
+          </Key>
+          <Property Name="ProductoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoProducto" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NombreProducto" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CantidadProducto" Type="Int32" Nullable="false" />
+          <Property Name="precioProducto" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="SedePertenece" Type="Int32" Nullable="false" />
+          <Property Name="ProveedorSurte" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CompraProductos" Relationship="Self.FK_CompraProductos_Producto" FromRole="Producto" ToRole="CompraProductos" />
+          <NavigationProperty Name="DetalleFactura" Relationship="Self.FK_DetalleFactura_Producto" FromRole="Producto" ToRole="DetalleFactura" />
+          <NavigationProperty Name="Devolucion" Relationship="Self.FK_Devolucion_Producto" FromRole="Producto" ToRole="Devolucion" />
+          <NavigationProperty Name="Sede" Relationship="Self.FK_Producto_Sede" FromRole="Producto" ToRole="Sede" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Producto_Usuario" FromRole="Producto" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Sede">
+          <Key>
+            <PropertyRef Name="SedeId" />
+          </Key>
+          <Property Name="SedeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreSede" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DireccionSede" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Sede" FromRole="Sede" ToRole="Producto" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_Sede" FromRole="Sede" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TipoUsuario">
+          <Key>
+            <PropertyRef Name="TipoClienteId" />
+          </Key>
+          <Property Name="TipoClienteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreTipoUsuario" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_TipoUsuario" FromRole="TipoUsuario" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="UsuarioId" />
+          </Key>
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CedulaUser" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NombresUser" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApellidosUser" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TelefonoUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DireccionUser" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="TipoUser" Type="Int32" Nullable="false" />
+          <Property Name="Sexouser" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CorreoUser" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoUser" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pass" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Sede" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CompraProductos" Relationship="Self.FK_CompraProductos_Usuario" FromRole="Usuario" ToRole="CompraProductos" />
+          <NavigationProperty Name="CompraProductos1" Relationship="Self.FK_CompraProductos_Usuario1" FromRole="Usuario" ToRole="CompraProductos" />
+          <NavigationProperty Name="Devolucion" Relationship="Self.FK_Devolucion_Usuario" FromRole="Usuario" ToRole="Devolucion" />
+          <NavigationProperty Name="HistoriaClinica" Relationship="Self.FK_HistoriaClinica_Usuario" FromRole="Usuario" ToRole="HistoriaClinica" />
+          <NavigationProperty Name="Mascota" Relationship="Self.FK_Mascota_Usuario" FromRole="Usuario" ToRole="Mascota" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Usuario" FromRole="Usuario" ToRole="Producto" />
+          <NavigationProperty Name="Sede1" Relationship="Self.FK_Usuario_Sede" FromRole="Usuario" ToRole="Sede" />
+          <NavigationProperty Name="TipoUsuario" Relationship="Self.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
+          <NavigationProperty Name="Venta" Relationship="Self.FK_Cliente_Usuario" FromRole="Usuario" ToRole="Venta" />
+          <NavigationProperty Name="Venta1" Relationship="Self.FK_Vendedor_Usuario" FromRole="Usuario" ToRole="Venta" />
+        </EntityType>
+        <EntityType Name="Venta">
+          <Key>
+            <PropertyRef Name="VentaId" />
+          </Key>
+          <Property Name="VentaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaVenta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CantidadVenta" Type="Int32" Nullable="false" />
+          <Property Name="ClienteCompra" Type="Int32" Nullable="false" />
+          <Property Name="VendedorVende" Type="Int32" Nullable="false" />
+          <Property Name="ValorTotalVenta" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="DetalleFactura" Relationship="Self.FK_DetalleFactura_Venta" FromRole="Venta" ToRole="DetalleFactura" />
+          <NavigationProperty Name="Devolucion" Relationship="Self.FK_Devolucion_Venta" FromRole="Venta" ToRole="Devolucion" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Cliente_Usuario" FromRole="Venta" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FK_Vendedor_Usuario" FromRole="Venta" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Receta">
+          <Key>
+            <PropertyRef Name="HistoriaClinicaId" />
+            <PropertyRef Name="DescripcionReceta" />
+          </Key>
+          <Property Name="HistoriaClinicaId" Type="Int32" Nullable="false" />
+          <Property Name="DescripcionReceta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="HistoriaClinica" Relationship="Self.FK_Receta_HistoriaClinica" FromRole="Receta" ToRole="HistoriaClinica" />
+        </EntityType>
+        <Association Name="FK_CompraProductos_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="1" />
+          <End Role="CompraProductos" Type="Self.CompraProductos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="IdAdmin" />
+            </Principal>
+            <Dependent Role="CompraProductos">
+              <PropertyRef Name="Admin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompraProductos_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="CompraProductos" Type="Self.CompraProductos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="ProductoId" />
+            </Principal>
+            <Dependent Role="CompraProductos">
+              <PropertyRef Name="Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompraProductos_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="CompraProductos" Type="Self.CompraProductos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="CompraProductos">
+              <PropertyRef Name="Proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompraProductos_Usuario1">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="CompraProductos" Type="Self.CompraProductos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="CompraProductos">
+              <PropertyRef Name="Admin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleFactura_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="DetalleFactura" Type="Self.DetalleFactura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="ProductoId" />
+            </Principal>
+            <Dependent Role="DetalleFactura">
+              <PropertyRef Name="ProductoVendido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleFactura_Venta">
+          <End Role="Venta" Type="Self.Venta" Multiplicity="1" />
+          <End Role="DetalleFactura" Type="Self.DetalleFactura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="VentaId" />
+            </Principal>
+            <Dependent Role="DetalleFactura">
+              <PropertyRef Name="Venta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Devolucion_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="Devolucion" Type="Self.Devolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="ProductoId" />
+            </Principal>
+            <Dependent Role="Devolucion">
+              <PropertyRef Name="ProductoDevuelto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Devolucion_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Devolucion" Type="Self.Devolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Devolucion">
+              <PropertyRef Name="VendedorAtendio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Devolucion_Venta">
+          <End Role="Venta" Type="Self.Venta" Multiplicity="1" />
+          <End Role="Devolucion" Type="Self.Devolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="VentaId" />
+            </Principal>
+            <Dependent Role="Devolucion">
+              <PropertyRef Name="VentaAsociada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoriaClinica_Mascota">
+          <End Role="Mascota" Type="Self.Mascota" Multiplicity="1" />
+          <End Role="HistoriaClinica" Type="Self.HistoriaClinica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mascota">
+              <PropertyRef Name="MascotaId" />
+            </Principal>
+            <Dependent Role="HistoriaClinica">
+              <PropertyRef Name="Mascota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoriaClinica_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="HistoriaClinica" Type="Self.HistoriaClinica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="HistoriaClinica">
+              <PropertyRef Name="Veterinario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receta_HistoriaClinica">
+          <End Role="HistoriaClinica" Type="Self.HistoriaClinica" Multiplicity="1" />
+          <End Role="Receta" Type="Self.Receta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HistoriaClinica">
+              <PropertyRef Name="HistoriaClinicaId" />
+            </Principal>
+            <Dependent Role="Receta">
+              <PropertyRef Name="HistoriaClinicaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mascota_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Mascota" Type="Self.Mascota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Mascota">
+              <PropertyRef Name="Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Sede">
+          <End Role="Sede" Type="Self.Sede" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sede">
+              <PropertyRef Name="SedeId" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="SedePertenece" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="ProveedorSurte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Sede">
+          <End Role="Sede" Type="Self.Sede" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sede">
+              <PropertyRef Name="SedeId" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_TipoUsuario">
+          <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuario">
+              <PropertyRef Name="TipoClienteId" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="TipoUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Venta">
+              <PropertyRef Name="ClienteCompra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vendedor_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="UsuarioId" />
+            </Principal>
+            <Dependent Role="Venta">
+              <PropertyRef Name="VendedorVende" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDRebajasCampoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admin" EntityType="Self.Admin" />
+          <EntitySet Name="CompraProductos" EntityType="Self.CompraProductos" />
+          <EntitySet Name="DetalleFactura" EntityType="Self.DetalleFactura" />
+          <EntitySet Name="Devolucion" EntityType="Self.Devolucion" />
+          <EntitySet Name="HistoriaClinica" EntityType="Self.HistoriaClinica" />
+          <EntitySet Name="Mascota" EntityType="Self.Mascota" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" />
+          <EntitySet Name="Sede" EntityType="Self.Sede" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <EntitySet Name="Venta" EntityType="Self.Venta" />
+          <EntitySet Name="Receta" EntityType="Self.Receta" />
+          <AssociationSet Name="FK_CompraProductos_Admin" Association="Self.FK_CompraProductos_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="CompraProductos" EntitySet="CompraProductos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompraProductos_Producto" Association="Self.FK_CompraProductos_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="CompraProductos" EntitySet="CompraProductos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompraProductos_Usuario" Association="Self.FK_CompraProductos_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="CompraProductos" EntitySet="CompraProductos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompraProductos_Usuario1" Association="Self.FK_CompraProductos_Usuario1">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="CompraProductos" EntitySet="CompraProductos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleFactura_Producto" Association="Self.FK_DetalleFactura_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="DetalleFactura" EntitySet="DetalleFactura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleFactura_Venta" Association="Self.FK_DetalleFactura_Venta">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="DetalleFactura" EntitySet="DetalleFactura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Devolucion_Producto" Association="Self.FK_Devolucion_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Devolucion" EntitySet="Devolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Devolucion_Usuario" Association="Self.FK_Devolucion_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Devolucion" EntitySet="Devolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Devolucion_Venta" Association="Self.FK_Devolucion_Venta">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="Devolucion" EntitySet="Devolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoriaClinica_Mascota" Association="Self.FK_HistoriaClinica_Mascota">
+            <End Role="Mascota" EntitySet="Mascota" />
+            <End Role="HistoriaClinica" EntitySet="HistoriaClinica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoriaClinica_Usuario" Association="Self.FK_HistoriaClinica_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="HistoriaClinica" EntitySet="HistoriaClinica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receta_HistoriaClinica" Association="Self.FK_Receta_HistoriaClinica">
+            <End Role="HistoriaClinica" EntitySet="HistoriaClinica" />
+            <End Role="Receta" EntitySet="Receta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mascota_Usuario" Association="Self.FK_Mascota_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Mascota" EntitySet="Mascota" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Sede" Association="Self.FK_Producto_Sede">
+            <End Role="Sede" EntitySet="Sede" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Usuario" Association="Self.FK_Producto_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Sede" Association="Self.FK_Usuario_Sede">
+            <End Role="Sede" EntitySet="Sede" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_TipoUsuario" Association="Self.FK_Usuario_TipoUsuario">
+            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_Usuario" Association="Self.FK_Cliente_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Venta" EntitySet="Venta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vendedor_Usuario" Association="Self.FK_Vendedor_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Venta" EntitySet="Venta" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BDRebajasCampoModelStoreContainer" CdmEntityContainer="BDRebajasCampoEntities">
+          <EntitySetMapping Name="Admin">
+            <EntityTypeMapping TypeName="BDRebajasCampoModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="IdAdmin" ColumnName="IdAdmin" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompraProductos">
+            <EntityTypeMapping TypeName="BDRebajasCampoModel.CompraProductos">
+              <MappingFragment StoreEntitySet="CompraProductos">
+                <ScalarProperty Name="CompraId" ColumnName="CompraId" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="FechaCompra" ColumnName="FechaCompra" />
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="CantidadProductoComprado" ColumnName="CantidadProductoComprado" />
+                <ScalarProperty Name="PrecioProductoComprado" ColumnName="PrecioProductoComprado" />
+                <ScalarProperty Name="Admin" ColumnName="Admin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleFactura">
+            <EntityTypeMapping TypeName="BDRebajasCampoModel.DetalleFactura">
+              <MappingFragment StoreEntitySet="DetalleFactura">
+                <ScalarProperty Name="DetalleFacturaId" ColumnName="DetalleFacturaId" />
+                <ScalarProperty Name="Venta" ColumnName="Venta" />
+                <ScalarProperty Name="ProductoVendido" ColumnName="ProductoVendido" />
+                <ScalarProperty Name="CantidadVendido" ColumnName="CantidadVendido" />
+                <ScalarProperty Name="ValorProductoVendido" ColumnName="ValorProductoVendido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Devolucion">
+            <EntityTypeMapping TypeName="BDRebajasCampoModel.Devolucion">
+              <MappingFragment StoreEntitySet="Devolucion">
+                <ScalarProperty Name="DevolucionId" ColumnName="DevolucionId" />
+                <ScalarProperty Name="VentaAsociada" ColumnName="VentaAsociada" />
+                <ScalarProperty Name="ProductoDevuelto" ColumnName="ProductoDevuelto" />
+                <ScalarProperty Name="CantidadprodDevuelto" ColumnName="CantidadprodDevuelto" />
+                <ScalarProperty Name="MotivoDevolucion" ColumnName="MotivoDevolucion" />
+                <ScalarProperty Name="FechaDevolucion" ColumnName="FechaDevolucion" />
+                <ScalarProperty Name="VendedorAtendio" ColumnName="VendedorAtendio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HistoriaClinica">
+            <EntityTypeMapping TypeName="BDRebajasCampoModel.HistoriaClinica">
+              <MappingFragment StoreEntitySet="HistoriaClinica">
+                <ScalarProperty Name="HistoriaClinicaId" ColumnName="HistoriaClinicaId" />
+                <ScalarProperty Name="FechaHistoria" ColumnName="FechaHistoria" />
+                <ScalarProperty Name="MotivoHistoria" ColumnName="MotivoHistoria" />
+                <ScalarProperty Name="ObservacionHistoria" ColumnName="ObservacionHistoria" />
+                <ScalarProperty Name="MedicamentoHistoria" ColumnName="MedicamentoHistoria" />
+                <ScalarProperty Name="Mascota" ColumnName="Mascota" />
+                <ScalarProperty Name="Veterinario" ColumnName="Veterinario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mascota">
+            <EntityTypeMapping TypeName="BDRebajasCampoModel.Mascota">
+              <MappingFragment StoreEntitySet="Mascota">
+                <ScalarProperty Name="MascotaId" ColumnName="MascotaId" />
+                <ScalarProperty Name="NombreMascota" ColumnName="NombreMascota" />
+                <ScalarProperty Name="EspecieMascota" ColumnName="EspecieMascota" />
+                <ScalarProperty Name="RazaMascota" ColumnName="RazaMascota" />
+                <ScalarProperty Name="SexoMascota" ColumnName="SexoMascota" />
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producto">
+            <EntityTypeMapping TypeName="BDRebajasCampoModel.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="ProductoId" ColumnName="ProductoId" />
+                <ScalarProperty Name="CodigoProducto" ColumnName="CodigoProducto" />
+                <ScalarProperty Name="NombreProducto" ColumnName="NombreProducto" />
+                <ScalarProperty Name="CantidadProducto" ColumnName="CantidadProducto" />
+                <ScalarProperty Name="precioProducto" ColumnName="precioProducto" />
+                <ScalarProperty Name="SedePertenece" ColumnName="SedePertenece" />
+                <ScalarProperty Name="ProveedorSurte" ColumnName="ProveedorSurte" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sede">
+            <EntityTypeMapping TypeName="BDRebajasCampoModel.Sede">
+              <MappingFragment StoreEntitySet="Sede">
+                <ScalarProperty Name="SedeId" ColumnName="SedeId" />
+                <ScalarProperty Name="NombreSede" ColumnName="NombreSede" />
+                <ScalarProperty Name="DireccionSede" ColumnName="DireccionSede" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BDRebajasCampoModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoUsuario">
+            <EntityTypeMapping TypeName="BDRebajasCampoModel.TipoUsuario">
+              <MappingFragment StoreEntitySet="TipoUsuario">
+                <ScalarProperty Name="TipoClienteId" ColumnName="TipoClienteId" />
+                <ScalarProperty Name="NombreTipoUsuario" ColumnName="NombreTipoUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="BDRebajasCampoModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="CedulaUser" ColumnName="CedulaUser" />
+                <ScalarProperty Name="NombresUser" ColumnName="NombresUser" />
+                <ScalarProperty Name="ApellidosUser" ColumnName="ApellidosUser" />
+                <ScalarProperty Name="TelefonoUser" ColumnName="TelefonoUser" />
+                <ScalarProperty Name="DireccionUser" ColumnName="DireccionUser" />
+                <ScalarProperty Name="TipoUser" ColumnName="TipoUser" />
+                <ScalarProperty Name="Sexouser" ColumnName="Sexouser" />
+                <ScalarProperty Name="CorreoUser" ColumnName="CorreoUser" />
+                <ScalarProperty Name="EstadoUser" ColumnName="EstadoUser" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Sede" ColumnName="Sede" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Venta">
+            <EntityTypeMapping TypeName="BDRebajasCampoModel.Venta">
+              <MappingFragment StoreEntitySet="Venta">
+                <ScalarProperty Name="VentaId" ColumnName="VentaId" />
+                <ScalarProperty Name="FechaVenta" ColumnName="FechaVenta" />
+                <ScalarProperty Name="CantidadVenta" ColumnName="CantidadVenta" />
+                <ScalarProperty Name="ClienteCompra" ColumnName="ClienteCompra" />
+                <ScalarProperty Name="VendedorVende" ColumnName="VendedorVende" />
+                <ScalarProperty Name="ValorTotalVenta" ColumnName="ValorTotalVenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Receta">
+            <EntityTypeMapping TypeName="BDRebajasCampoModel.Receta">
+              <MappingFragment StoreEntitySet="Receta">
+                <ScalarProperty Name="HistoriaClinicaId" ColumnName="HistoriaClinicaId" />
+                <ScalarProperty Name="DescripcionReceta" ColumnName="DescripcionReceta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
